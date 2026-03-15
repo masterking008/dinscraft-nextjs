@@ -1,26 +1,137 @@
 @import "tailwindcss";
 
+/* ── Local fonts ── */
+@font-face {
+  font-family: "Focus";
+  src: url("/fonts/focus-300.woff2") format("woff2");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Focus";
+  src: url("/fonts/focus-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Focus";
+  src: url("/fonts/focus-500.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Focus";
+  src: url("/fonts/focus-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Public";
+  src: url("/fonts/public-300.woff2") format("woff2");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Public";
+  src: url("/fonts/public-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Public";
+  src: url("/fonts/public-500.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Public";
+  src: url("/fonts/public-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Public";
+  src: url("/fonts/public-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* ── Design tokens ── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-primary:    #ffffff;
+  --bg-secondary:  #fafafa;
+  --bg-tertiary:   #f4f4f5;
+  --border-base:   rgba(0,0,0,0.063);
+  --border-strong: rgba(0,0,0,0.145);
+  --tx-primary:    #0a0a0a;
+  --tx-secondary:  #52525b;
+  --tx-tertiary:   #a1a1aa;
+  --btn-primary: #252527;
+  --btn-secondary: #ffffff;
 }
 
+.dark {
+  --bg-primary:    #0a0a0a;
+  --bg-secondary:  #111111;
+  --bg-tertiary:   #1a1a1a;
+  --border-base:   rgba(255,255,255,0.078);
+  --border-strong: rgba(255,255,255,0.145);
+  --tx-primary:    #ffffff;
+  --tx-secondary:  #a0a0a0;
+  --tx-tertiary:   #666666;
+}
+
+/* ── Tailwind theme registration ── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-focus:  "Focus", sans-serif;
+  --font-public: "Public", sans-serif;
+
+  --radius-DEFAULT: 0.25rem;
+
+  --color-bg-primary:    var(--bg-primary);
+  --color-bg-secondary:  var(--bg-secondary);
+  --color-bg-tertiary:   var(--bg-tertiary);
+  --color-border-base:   var(--border-base);
+  --color-border-strong: var(--border-strong);
+  --color-tx-primary:    var(--tx-primary);
+  --color-tx-secondary:  var(--tx-secondary);
+  --color-tx-tertiary:   var(--tx-tertiary);
+  --color-btn-primary:   var(--btn-primary);
+  --color-btn-secondary: var(--btn-secondary);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* ── Base ── */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--tx-primary);
+  font-family: "Focus", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-family: "Focus", sans-serif;
+}
+
+button, [role="button"] {
+  font-family: "Public", sans-serif;
+}
+
+/* ── Animations ── */
+@keyframes blob-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-20px) scale(1.04); }
+}
+.blob-float      { animation: blob-float 10s ease-in-out infinite; }
+.blob-float-slow { animation: blob-float 14s ease-in-out infinite reverse; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 0.4s ease forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
